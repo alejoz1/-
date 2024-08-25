@@ -4,7 +4,7 @@ var lyrics = document.querySelector("#lyrics");
 
 // Array de objetos que contiene cada línea y su tiempo de aparición en segundos
 var lyricsData = [
-  { text: "في ذلك الوقت", time: 15 },
+  { text: "في ذلك الوقت", time: 7 },
   { text: "همس الطيور", time: 18 },
   { text: "وحيد قبل أن تبكي الشمس", time: 27 },
   { text: "سقط من السماء", time: 32 },
@@ -32,7 +32,7 @@ var lyricsData = [
   { text: "في مزاج لحب الزهور", time: 188 },
   { text: "حب.", time: 140 },
 ];
-
+//desactivar letra
 // Animar las letras
 function updateLyrics() {
   var time = Math.floor(audio.currentTime);
