@@ -4,68 +4,61 @@ var lyrics = document.querySelector("#lyrics");
 
 // Array de objetos que contiene cada línea y su tiempo de aparición en segundos
 var lyricsData = [
-  { text: "في ذلك الوقت", time: 7 },
-  { text: "همس الطيور", time: 18 },
-  { text: "وحيد قبل أن تبكي الشمس", time: 27 },
-  { text: "سقط من السماء", time: 32 },
-  { text: "مثل قطرات الماء", time: 33 },
-  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 41 },
-  { text: "فراشات جميلة في يدي", time: 47 },
-  { text: "الكثير من الضوء للشفق", time: 54 },
-  { text: "في مزاج لحب الزهور", time: 59 },
-  { text: "تلك الرؤية", time: 67 },
-  { text: "قوية جدا، أذهلتني", time: 72 },
-  { text: "الصمت دعني أرى ما كان عليه", time: 78 },
-  { text: "أريد فقط أن أعيش في الغيوم", time: 83 },
-  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 91 },
-  { text: "فراشات جميلة في يدي", time: 97 },
-  { text: "الكثير من الضوء للشفق", time: 104 },
-  { text: "في مزاج لحب الزهور", time: 108 },
-  { text: "في ذلك الوقت", time: 144 },
-  { text: "همس الطيور", time: 148 },
-  { text: "وحيد قبل أن تبكي الشمس", time: 153 },
-  { text: "سقط من السماء", time: 158 },
-  { text: "مثل قطرات الماء", time: 164 },
-  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 169 },
-  { text: "فراشات جميلة في يدي", time: 176 },
-  { text: "الكثير من الضوء للشفق", time: 183 },
-  { text: "في مزاج لحب الزهور", time: 188 },
+  { text: "في ذلك الوقت", time: 13 },
+  { text: "همس الطيور", time: 16 },
+  { text: "وحيد قبل أن تبكي الشمس", time: 20 },
+  { text: "سقط من السماء", time: 24 },
+  { text: "مثل قطرات الماء", time: 28 },
+  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 32 },
+  { text: "فراشات جميلة في يدي", time: 36 },
+  { text: "الكثير من الضوء للشفق", time: 40 },
+  { text: "في مزاج لحب الزهور", time: 44 },
+  { text: "تلك الرؤية", time: 48 },
+  { text: "قوية جدا، أذهلتني", time: 52 },
+  { text: "الصمت دعني أرى ما كان عليه", time: 56 },
+  { text: "أريد فقط أن أعيش في الغيوم", time: 60 },
+  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 64 },
+  { text: "فراشات جميلة في يدي", time: 68 },
+  { text: "الكثير من الضوء للشفق", time: 72 },
+  { text: "في مزاج لحب الزهور", time: 76 },
+  { text: "في ذلك الوقت", time: 104 },
+  { text: "همس الطيور", time: 108 },
+  { text: "وحيد قبل أن تبكي الشمس", time: 112 },
+  { text: "سقط من السماء", time: 116 },
+  { text: "مثل قطرات الماء", time: 120 },
+  { text: "أين أنا الآن؟ لا أعرف لماذا", time: 124 },
+  { text: "فراشات جميلة في يدي", time: 128 },
+  { text: "الكثير من الضوء للشفق", time: 132 },
+  { text: "في مزاج لحب الزهور", time: 136 },
   { text: "حب.", time: 140 },
 ];
-//desactivar letra
+
 // Animar las letras
 function updateLyrics() {
-  var time = Math.floor(audio.currentTime);
+  var time = audio.currentTime;
   var currentLine = lyricsData.find(
-    (line) => time >= line.time && time < line.time + 6
+    (line) => time >= line.time - 0.5 && time < line.time + 3.5
   );
 
   if (currentLine) {
-    // Calcula la opacidad basada en el tiempo en la línea actual
-    var fadeInDuration = 0.1; // Duración del efecto de aparición en segundos
-    var opacity = Math.min(1, (time - currentLine.time) / fadeInDuration);
-
-    // Aplica el efecto de aparición
+    var opacity = Math.min(1, (time - (currentLine.time - 0.5)) / 0.5);
     lyrics.style.opacity = opacity;
     lyrics.innerHTML = currentLine.text;
   } else {
-    // Restablece la opacidad y el contenido si no hay una línea actual
     lyrics.style.opacity = 0;
     lyrics.innerHTML = "";
   }
 }
 
-setInterval(updateLyrics, 1000);
+audio.addEventListener('timeupdate', updateLyrics);
 
 // Función para ocultar el título después de 216 segundos
 function ocultarTitulo() {
   var titulo = document.querySelector(".titulo");
-  titulo.style.animation =
-    "fadeOut 3s ease-in-out forwards"; /* Duración y función de temporización de la desaparición */
+  titulo.style.animation = "fadeOut 3s ease-in-out forwards";
   setTimeout(function () {
     titulo.style.display = "none";
-  }, 3000); // Espera 3 segundos antes de ocultar completamente
+  }, 3000);
 }
 
-// Llama a la función después de 216 segundos (216,000 milisegundos)
-setTimeout(ocultarTitulo, 216000);
+setTimeout(ocultarTitulo, 140000); // Oculta el título después de 140 segundos
